@@ -3,6 +3,8 @@
 
 <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+
     <title>projet_3</title>
     
   <style>
@@ -20,9 +22,6 @@
 #station-details {
   margin: 60px;
 }
-
-
-
 
 </style>
 
@@ -49,23 +48,39 @@
 <h3>My Google Maps Demo</h3>
     <div id="bike-map">
       <div id="map"></div>
-      <div id="station-details">
+      <div id="station-details" style="display:none">
         <h1>Détails de la station</h1>
         <p>Station : <span id="station-name"></span></p>
         <p>Adresse : <span id="station-address"></span></p>
         <p>Nombre de vélos disponibles : <span id="available_bikes"></span></p>
-        <button id="book-bike-btn">Réserver</button>
+        <button id="book-bike-btn" style="display: none">Réserver</button>
+        
+        <canvas id="canvas" width="200" height="200" style="border: 2px solid black; display: none;">
+        
+        <p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
+        </canvas>
+        <button id="validate-booking">Valider ma réservation</button>
+        <button id="clear">Effacer</button>
 
       </div>
     </div>
 	
-	<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	
+  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe-UJaHdTleFjUaE6xpFzpi7Xe5JRT8pE">
     </script>
 
+
+
+
+<script src="../js/signatureBoxPOO.js"></script>
+
 <script src="../js/projet_3.js"></script>
+
 <script src="../js/mapobjet.js"></script>
 
 </body>

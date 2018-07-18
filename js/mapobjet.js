@@ -48,6 +48,9 @@ var position = {lat: 45.750000, lng: 4.850000};
 myMap = myMap.init(position, 13);
 
 var markers = [];
+var bookBikeBtn = document.getElementById("book-bike-btn");
+var canvas = document.querySelector("canvas");
+
 
 ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f44a09c1eb3a3a29e5ae0068c69ae318d", function (reponse) {
     var json_response = JSON.parse(reponse);
@@ -66,7 +69,6 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
         
         var maStation = Object.create(Station);
         maStation.init(JSON.parse(reponse).name,JSON.parse(reponse).address,JSON.parse(reponse).available_bikes);
-        var bookBikeBtn = document.getElementById("book-bike-btn");
         if (maStation.available_bikes === 0) {
             bookBikeBtn.style.display = "none";
         }
@@ -74,6 +76,8 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
             bookBikeBtn.style.display = "block"
         }
 
+        canvas.style.display = "none";
+        document.getElementById("station-details").style.display = "block";
         maStation.afficher();
         });
     });
@@ -84,6 +88,18 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
     var markerCluster = new MarkerClusterer(myMap, markers,
         {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 });
+
+
+bookBikeBtn.addEventListener('click', function() {
+    canvas.style.display = "block";
+
+    
+
+});
+
+
+
+
 
 
 

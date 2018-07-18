@@ -16,7 +16,6 @@ var diapositive3 = Object.create(Diapositive);
 
 var diapositives = [diapositive1,diapositive2,diapositive3];
 
-/*push ?*/
 
 
 
