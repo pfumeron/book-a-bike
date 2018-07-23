@@ -51,6 +51,14 @@ boutonfd.addEventListener("click", function () {
     diaporama.changeSlide(1);
 });
 
+window.addEventListener("keyup", function(e) {
+	if(e.keyCode == "37") {
+		diaporama.changeSlide(-1);
+	} else if(e.keyCode == "39") {
+		diaporama.changeSlide(1);
+	}
+});
+
 
 
 
