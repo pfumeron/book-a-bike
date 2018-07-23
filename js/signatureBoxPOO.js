@@ -1,8 +1,6 @@
 $(document).ready(function() { 
 
 	var Canvas = {
-		canvas: document.getElementById('canvas'),
-		context: canvas.getContext("2d"),
 		clickX: new Array(),
 		clickY: new Array(),
 		newDrawing: new Array(),
@@ -11,9 +9,24 @@ $(document).ready(function() {
 
 		init: function(canvasId) {
 			Canvas.canvas = document.getElementById(canvasId);
+			Canvas.context = canvas.getContext("2d"),
 			Canvas.canvas.addEventListener("mousedown",Canvas.mouseDown);
 		    Canvas.canvas.addEventListener("mousemove", Canvas.mouseMove);
 		    Canvas.canvas.addEventListener("mouseup",Canvas.mouseUp);
+
+		    if(typeof sessionStorage!='undefined') {				
+				if('timeValidateBooking' in sessionStorage) {
+					var timeLeftBooking = 1200000 - (Date.now() - sessionStorage.timeValidateBooking);
+					if(timeLeftBooking > 0) {
+				    	document.getElementById("timeLeftBooking").innerHTML = Math.round(timeLeftBooking/1000/60);
+				    	document.getElementById("bookingConfirmed").style.display = "block";
+					} else {
+						sessionStorage.clear();
+					}
+				}
+			} else {
+			  alert("sessionStorage n'est pas supporté");
+			}
 
 		     //For mobile
 		    Canvas.canvas.addEventListener("touchstart", Canvas.mouseDown, false);
@@ -102,11 +115,19 @@ $(document).ready(function() {
     	},
 
 	    bookBike: function (e) {
-	        if (Canvas.isnotEmpty) {
-	            console.log("Votre vélo est réservé pendant 20min");
-	        } else {
-	            console.log("Veuillez refaire votre signature");
-	        }
+	    	
+	    	if(typeof sessionStorage!='undefined') {
+				sessionStorage.timeValidateBooking = Date.now();
+
+				if('timeValidateBooking' in sessionStorage) {
+				    var timeLeftBooking = 1200000 - (Date.now() - sessionStorage.timeValidateBooking);
+				    document.getElementById("timeLeftBooking").innerHTML = Math.round(timeLeftBooking/1000/60);
+				    document.getElementById("bookingConfirmed").style.display = "block";
+				}
+			} else {
+			  alert("sessionStorage n'est pas supporté");
+			}
+
 	    },
 	};
 
@@ -114,6 +135,5 @@ $(document).ready(function() {
 	canvasSignature.init('canvas');
 
 
-   
 
 });
