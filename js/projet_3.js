@@ -42,23 +42,15 @@ var diaporama = Object.create(Diaporama);
 
 
 var boutonfg = document.getElementById("flechegauche");
-// Ajout d'un gestionnaire pour l'événement click
 boutonfg.addEventListener("click", function () {
     diaporama.changeSlide(-1);
 });
 
 var boutonfd = document.getElementById("flechedroite");
-// Ajout d'un gestionnaire pour l'événement click
 boutonfd.addEventListener("click", function () {
     diaporama.changeSlide(1);
 });
 
-/*document.getElementById("flechegauche").addEventListener("click", function (e) {
-	diaporama.changeSlide(-1);
-});
 
-document.getElementById("flechedroite").addEventListener("click", function (e) {
-	diaporama.changeSlide(1);
-});*/
 
 
