@@ -19,7 +19,9 @@ $(document).ready(function() {
 					var timeLeftBooking = 1200000 - (Date.now() - sessionStorage.timeValidateBooking);
 					if(timeLeftBooking > 0) {
 				    	document.getElementById("timeLeftBooking").innerHTML = Math.round(timeLeftBooking/1000/60);
-				    	document.getElementById("bookingConfirmed").style.display = "block";
+				    	bookingConfirmed.classList.add("show-reservation");
+				    	document.getElementById("box-confirmation-message").classList.remove("show-box-confirmation-message");
+
 					} else {
 						sessionStorage.clear();
 					}
@@ -114,7 +116,9 @@ $(document).ready(function() {
 	        Canvas.isnotEmpty = false;
     	},
 
+
 	    bookBike: function (e) {
+	    	var bookingConfirmed = document.getElementById("bookingConfirmed");
 	    	
 	    	if(typeof sessionStorage!='undefined') {
 				sessionStorage.timeValidateBooking = Date.now();
@@ -122,8 +126,14 @@ $(document).ready(function() {
 				if('timeValidateBooking' in sessionStorage) {
 				    var timeLeftBooking = 1200000 - (Date.now() - sessionStorage.timeValidateBooking);
 				    document.getElementById("timeLeftBooking").innerHTML = Math.round(timeLeftBooking/1000/60);
-				    document.getElementById("bookingConfirmed").style.display = "block";
+					document.getElementById("timeLeftBooking-box").innerHTML = Math.round(timeLeftBooking/1000/60);
+				    document.getElementById("box-confirmation-message").classList.add("show-box-confirmation-message");
+				    bookingConfirmed.classList.add("show-reservation");
+				    canvas.style.display = "none";
+				    validateBookingButton.classList.remove("show-validate-booking");
+    				clearSignature.classList.remove("show-clear");
 				}
+
 			} else {
 			  alert("sessionStorage n'est pas supporté");
 			}
@@ -133,7 +143,5 @@ $(document).ready(function() {
 
 	var canvasSignature = Object.create(Canvas);
 	canvasSignature.init('canvas');
-
-
 
 });

@@ -7,6 +7,7 @@ body {
 h1, h2, h3 {
 	text-align: center;
 	font-family: Catamaran,Helvetica,Arial,sans-serif;
+	font-weight: 900;
 }
 
 p {
@@ -14,9 +15,13 @@ p {
 }
 
 .btn-outline {
-	color: black;
+	color: #00d4b8;
+	border-color: #00d4b8;
 }
 
+.btn-align {
+	text-align: center;
+}
 
 .map-icon-label .map-icon {
 	font-size: 24px;
@@ -27,17 +32,126 @@ p {
 	padding-bottom: 7px;
 }
 
+img #my-slides {
+	position: relative;
+}
+
+.div-left-arrow {
+	position: absolute;
+	top:50%;
+    width: 35px;
+    height: 35px;
+}
+
+#left-arrow {
+	position: absolute;
+	left: 0;
+	margin-left: 10px;
+	margin-top: 5px;
+	font-size: 24px;
+	z-index: 2;
+	cursor: pointer;
+}
+
+
+.div-right-arrow {
+	position: absolute;
+	right:0;
+	top:50%;
+	width: 35px;
+    height: 35px;
+}
+
+#right-arrow {
+	position: absolute;
+	right: 0;
+	margin-right: 10px;
+	margin-top: 5px;
+	font-size: 24px;
+	z-index: 2;
+	cursor: pointer;
+}
+
+.container-map {
+	padding-bottom: 15px;
+}
+
+.container-map p {
+	padding: 0 10px 0 10px;
+	
+}
+
 #bike-map {
-  display: flex;
-  }
+ 	display: flex;
+	justify-content: space-around;
+  
+}
 
 #map {
-   width: 100%;
-   height: 400px;
+   width:80%;
+   height: 500px;
    background-color: grey;
-   margin: 10px;
+   margin: 0 10px 0 0px;
  }
 
-#station-details {
-  
+#map.add-station-details {
+	width: 70%;
+	height:500px;
+}
+
+#station-details, #no-bike-available {
+	display: none;
+}
+
+#station-details.show-station-details {
+	display: block;
+	height: 500px;
+	background-color: #FFFFFF;
+	color:#545454;
+	margin-right: 10px;
+	padding-left: 5px;
+	width: 30%;
+}
+
+#book-bike-btn, #validate-booking, #clear, #no-bike-available, #box-confirmation-message {
+	display: none;
+}
+
+#book-bike-btn.show-book-bike-btn, #validate-booking.show-validate-booking, #clear.show-clear, #no-bike-available.show-no-bike-available {
+	display: inline;
+}
+
+#box-confirmation-message.show-box-confirmation-message {
+	display: inline;
+}
+
+.station-address-style {
+	font-size: 14px;
+}
+
+#canvas {
+	margin: 10px 5px 10px 5px; 
+	border: 2px solid #545454;
+}
+
+.blank-footer {
+	background-color: #FFFFFF;
+	width: 100%;
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+}
+
+#bookingConfirmed {
+	display: none;
+}
+
+#bookingConfirmed.show-reservation {
+	display: inline-block;
+	box-sizing: border-box;
+	background-color: #FFFFFF;
+	color:#545454;
+	padding: 20px 0 20px 20px;
+	width: 100%;
+	margin: 0;
 }

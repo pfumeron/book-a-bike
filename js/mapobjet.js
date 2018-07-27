@@ -74,6 +74,12 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
         });
     
     marker.addListener('click', function() {
+        validateBookingButton.classList.remove("show-validate-booking");
+        clearSignature.classList.remove("show-clear");
+        document.getElementById("box-confirmation-message").classList.remove("show-box-confirmation-message");
+        document.getElementById("no-bike-available").classList.remove("show-no-bike-available");
+        bookBikeBtn.classList.add("show-book-bike-btn");
+
         var url = "https://api.jcdecaux.com/vls/v1/stations/" + marker.number + "?contract=lyon&apiKey=93e55d0f44a09c1eb3a3a29e5ae0068c69ae318d";
 
         ajaxGet(url, function (reponse) {
@@ -81,15 +87,18 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
         var maStation = Object.create(Station);
         maStation.init(JSON.parse(reponse).name,JSON.parse(reponse).address,JSON.parse(reponse).available_bikes);
         if (maStation.available_bikes === 0) {
-            bookBikeBtn.style.display = "none";
+            bookBikeBtn.classList.remove("show-book-bike-btn");
+            document.getElementById("map").classList.add("add-station-details");
+            document.getElementById("station-details").classList.add("show-station-details");
+            document.getElementById("no-bike-available").classList.add("show-no-bike-available");
         }
         else {
-            bookBikeBtn.style.display = "block";
-
+            document.getElementById("map").classList.add("add-station-details");
+            document.getElementById("station-details").classList.add("show-station-details");
+            bookBikeBtn.classList.add("show-book-bike-btn");
         }
 
         canvas.style.display = "none";
-        document.getElementById("station-details").style.display = "block";
         maStation.afficher();
         });
     });
@@ -104,21 +113,14 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
 
 bookBikeBtn.addEventListener('click', function() {
     canvas.style.display = "block";
-    validateBookingButton.style.display = "block";
-    clearSignature.style.display = "block";
-    bookBikeBtn.style.display = "none";
-
-    
-
+    validateBookingButton.classList.add("show-validate-booking");
+    clearSignature.classList.add("show-clear");
+    bookBikeBtn.classList.remove("show-book-bike-btn");
 });
 
 
 
 
-
-
-
-//afficher bouton réserver uniquement si vélos disponibles, puis au click du réserver ==> le canvas apparaît pour faire la signature
 
 
 

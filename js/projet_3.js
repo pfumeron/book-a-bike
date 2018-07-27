@@ -32,7 +32,7 @@ var Diaporama = {
 		if (this.slideIndex > this.slides.length -1) {
 			this.slideIndex = 0;
 		}
-		document.getElementById("mySlides").src = this.slides[this.slideIndex].src;
+		document.getElementById("my-slides").src = this.slides[this.slideIndex].src;
 		document.getElementById("myDescriptions").innerHTML = this.slides[this.slideIndex].legende;
 	}
 };
@@ -41,12 +41,12 @@ var diaporama = Object.create(Diaporama);
 	diaporama.init(diapositives);
 
 
-var boutonfg = document.getElementById("flechegauche");
+var boutonfg = document.getElementById("left-arrow");
 boutonfg.addEventListener("click", function () {
     diaporama.changeSlide(-1);
 });
 
-var boutonfd = document.getElementById("flechedroite");
+var boutonfd = document.getElementById("right-arrow");
 boutonfd.addEventListener("click", function () {
     diaporama.changeSlide(1);
 });
