@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,user-scalable=no">
+    
+
+    <title>projet_3</title>
+    
+    <link rel="stylesheet" href="../dist/css/map-icons.min.css">
+    <link rel="stylesheet" href="../css/new-age.min.css">
+    <link rel="stylesheet" media= "screen" href="../css/projet_3.css">
+    <link rel="stylesheet" media="screen and (max-width: 1280px)" href="../css/projet_3_responsive.css" />
+
+    <link href="https://fonts.googleapis.com/css?family=Catamaran" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="header">
+  <h1>Vélo'v</h1>
+  <h2>Bienvenue sur le site de réservation de vélos à Lyon</h2>
+    <div class="diaporamaSlides">
+    <img src="../images/img1.jpg" id="my-slides" style="width:100%" /> 
+	<p id="myDescriptions">Légende de l'image 1</p>
+</div>
+
+	<div class="btn btn-outline div-left-arrow">
+    <span id="left-arrow" >&#10094;</span>
+  </div>
+  
+  <div class="btn btn-outline div-right-arrow">
+    <span id="right-arrow">&#10095;</span>
+  </div>
+
+</div>
+
+
+
+<div class="container-map">
+  <h2>Cliquez sur la station de votre choix sur la carte :</h2>
+  <p>Lorsque vous voyez un rond avec un chiffre à l'intérieur, cela indique qu'il y a plusieurs stations proches les unes des autres. Cliquez dessus, la carte fera apparaître les stations automatiquement.</p>
+      <div id="bike-map">
+        <div id="map">
+        </div>
+        
+        <div id="station-details">
+          <h1>Détails de la station</h1>
+            <p>Station : <span id="station-name"></span></p>
+            <p class="station-address-style">Adresse : <span id="station-address"></span></p>
+            <p>Vélos disponibles : <span id="available_bikes"></span></p>
+            <p id="no-bike-available">Aucun Vélo'v n'est disponible pour le moment. Essayez sur une station voisine !</p>
+          
+          <div class="btn-align">
+            <button id="book-bike-btn" class="btn btn-outline btn-xl">Réserver</button>
+          </div>
+          
+          <canvas id="canvas" width="300" height="100" style="display: none;">
+            <p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
+          </canvas>
+          
+          <button id="clear" class="btn btn-outline btn-xl" >Effacer</button>
+          <button id="validate-booking" class="btn btn-outline btn-xl" >Valider</button>
+          <p id="box-confirmation-message">Votre vélo est réservé pendant <span id="timeLeftBooking-box"></span> minutes !</p>
+          
+        </div>
+      </div>
+</div>
+
+  <div class="blank-footer">
+    <p id="bookingConfirmed">Votre vélo est réservé pendant <span id="timeLeftBooking"></span> minutes</p>
+  </div>
+	
+  <script src="../dist/js/map-icons.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBe-UJaHdTleFjUaE6xpFzpi7Xe5JRT8pE">
+    </script>
+
+
+
+
+<script src="../js/signatureBoxPOO.js"></script>
+
+<script src="../js/projet_3.js"></script>
+
+<script src="../js/mapobjet.js"></script>
+
+</body>
+
+</html>
