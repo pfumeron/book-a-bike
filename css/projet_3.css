@@ -32,8 +32,14 @@ p {
 	padding-bottom: 7px;
 }
 
-img #my-slides {
+.diaporamaSlides {
+	
+
+}
+
+#my-slides {
 	position: relative;
+	width: 80%;
 }
 
 .div-left-arrow {
@@ -70,6 +76,17 @@ img #my-slides {
 	font-size: 24px;
 	z-index: 2;
 	cursor: pointer;
+}
+
+#myDescriptions {
+	position: absolute;
+	right: 0;
+	top: 150px;
+	margin:0;
+	width: 20%;
+	height:350px;
+	padding: 30px;
+	background-color: rgba(84, 84, 84,0.7); 
 }
 
 .container-map {
@@ -142,11 +159,11 @@ img #my-slides {
 	text-align: center;
 }
 
-#bookingConfirmed {
+#booking-confirmed {
 	display: none;
 }
 
-#bookingConfirmed.show-reservation {
+#booking-confirmed.show-reservation {
 	display: inline-block;
 	box-sizing: border-box;
 	background-color: #FFFFFF;

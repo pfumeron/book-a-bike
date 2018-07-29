@@ -23,15 +23,17 @@
 <div class="header">
   <h1>Vélo'v</h1>
   <h2>Bienvenue sur le site de réservation de vélos à Lyon</h2>
-    <div class="diaporamaSlides">
-    <img src="images/img1.jpg" id="my-slides" style="width:100%" /> 
-	<p id="myDescriptions">Légende de l'image 1</p>
 </div>
 
-	<div class="btn btn-outline div-left-arrow">
+<div>
+  <div class="diaporamaSlides">
+    <img src="images/img1.png" id="my-slides"/> 
+    <p id="myDescriptions">Choissisez sur la station de votre choix en cliquant sur l'un des points sur la carte. Un cercle avec un chiffre à l'intérieur indique plusieurs stations proches les unes des autres. Cliquez, les stations apparaîtront automatiquement.</p>
+  </div>
+  <div class="btn btn-outline div-left-arrow">
     <span id="left-arrow" >&#10094;</span>
   </div>
-  
+
   <div class="btn btn-outline div-right-arrow">
     <span id="right-arrow">&#10095;</span>
   </div>
@@ -39,10 +41,8 @@
 </div>
 
 
-
 <div class="container-map">
   <h2>Cliquez sur la station de votre choix sur la carte :</h2>
-  <p>Lorsque vous voyez un rond avec un chiffre à l'intérieur, cela indique qu'il y a plusieurs stations proches les unes des autres. Cliquez dessus, la carte fera apparaître les stations automatiquement.</p>
       <div id="bike-map">
         <div id="map">
         </div>
@@ -64,14 +64,13 @@
           
           <button id="clear" class="btn btn-outline btn-xl" >Effacer</button>
           <button id="validate-booking" class="btn btn-outline btn-xl" >Valider</button>
-          <p id="box-confirmation-message">Votre vélo est réservé pendant <span id="timeLeftBooking-box"></span> minutes !</p>
           
         </div>
       </div>
 </div>
 
   <div class="blank-footer">
-    <p id="bookingConfirmed">Votre vélo est réservé pendant <span id="timeLeftBooking"></span> minutes</p>
+    <p id="booking-confirmed">Votre vélo est réservé pendant <span id="time-left-booking"></span> minutes. Veuillez vous rendre à cette adresse :<span id="bookingConfirmed-station-address"></span></p>
   </div>
 	
   <script src="dist/js/map-icons.js"></script>
