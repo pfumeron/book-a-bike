@@ -6,15 +6,18 @@ var Diapositive = {
 };
 
 var diapositive1 = Object.create(Diapositive);
-	diapositive1.init("../images/img1.jpg","Légende de l'image 1");
+	diapositive1.init("images/img1.png","Choissisez sur la station de votre choix en cliquant sur l'un des points sur la carte. Un cercle avec un chiffre à l'intérieur indique plusieurs stations proches les unes des autres. Cliquez, les stations apparaîtront automatiquement.");
 
 var diapositive2 = Object.create(Diapositive);
-	diapositive2.init("../images/img2.jpg","Légende de l'image 2");
+	diapositive2.init("images/img2.png","Vérifier les informations de la station, si vous souhaitez confirmer votre réservation, cliquez sur Réserver");
 
 var diapositive3 = Object.create(Diapositive);
-	diapositive3.init("../images/img3.jpg","Légende de l'image 3");
+	diapositive3.init("images/img3.png","Finaliser votre réservation en signant dans le cadre puis Valider.");
 
-var diapositives = [diapositive1,diapositive2,diapositive3];
+var diapositive4 = Object.create(Diapositive);
+	diapositive4.init("images/img4.png","Votre vélo est réservé pendant 20min.");
+
+var diapositives = [diapositive1,diapositive2,diapositive3,diapositive4];
 
 
 
