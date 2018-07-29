@@ -76,7 +76,6 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
     marker.addListener('click', function() {
         validateBookingButton.classList.remove("show-validate-booking");
         clearSignature.classList.remove("show-clear");
-        document.getElementById("box-confirmation-message").classList.remove("show-box-confirmation-message");
         document.getElementById("no-bike-available").classList.remove("show-no-bike-available");
         bookBikeBtn.classList.add("show-book-bike-btn");
 
@@ -86,17 +85,17 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
         
         var maStation = Object.create(Station);
         maStation.init(JSON.parse(reponse).name,JSON.parse(reponse).address,JSON.parse(reponse).available_bikes);
-        if (maStation.available_bikes === 0) {
-            bookBikeBtn.classList.remove("show-book-bike-btn");
-            document.getElementById("map").classList.add("add-station-details");
-            document.getElementById("station-details").classList.add("show-station-details");
-            document.getElementById("no-bike-available").classList.add("show-no-bike-available");
-        }
-        else {
-            document.getElementById("map").classList.add("add-station-details");
-            document.getElementById("station-details").classList.add("show-station-details");
-            bookBikeBtn.classList.add("show-book-bike-btn");
-        }
+            if (maStation.available_bikes === 0) {
+                bookBikeBtn.classList.remove("show-book-bike-btn");
+                document.getElementById("map").classList.add("add-station-details");
+                document.getElementById("station-details").classList.add("show-station-details");
+                document.getElementById("no-bike-available").classList.add("show-no-bike-available");
+            }
+            else {
+                document.getElementById("map").classList.add("add-station-details");
+                document.getElementById("station-details").classList.add("show-station-details");
+                bookBikeBtn.classList.add("show-book-bike-btn");
+            }
 
         canvas.style.display = "none";
         maStation.afficher();
