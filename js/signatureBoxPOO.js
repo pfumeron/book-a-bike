@@ -21,6 +21,16 @@ var Canvas = {
 
 	    var clearButton = document.getElementById("clear");
 	    clearButton.addEventListener('click', Canvas.clear);
+	    
+		var validateBooking = document.getElementById("validate-booking");
+		validateBooking.addEventListener('click', function(){
+		  if (Canvas.isNotEmpty) {
+		    Booking.bookBike();
+		  } else {
+		  	alert("Veuillez signer pour réserver votre vélo.")
+		  }
+		});
+	    
 	},
 
 	addClick: function(mouseX,mouseY,newClick) {
@@ -58,7 +68,7 @@ var Canvas = {
             Canvas.context.closePath();                               //close path
         }
 
-        Canvas.isnotEmpty = true;
+        Canvas.isNotEmpty = true;
     },
 
     mouseMove: function (e) {
@@ -93,9 +103,14 @@ var Canvas = {
         Canvas.clickX = [];
         Canvas.clickY = [];
         Canvas.newDrawing = [];
-        Canvas.isnotEmpty = false;
+        Canvas.isNotEmpty = false;
 	},
-
+	
+	isNotEmpty: function() {
+		if (isNotEmpty) {
+			Canvas.isNotEmpty = true;
+		}
+	},
 };
 
 var canvasSignature = Object.create(Canvas);
@@ -104,23 +119,43 @@ canvasSignature.init('canvas');
 
 
 var Booking = {
-	init: function() {
-		var validateBooking = document.getElementById("validate-booking");
-		validateBooking.addEventListener('click', Booking.bookBike);
-	},
+	init: function(name,address) {
+        this.name = name;
+        this.address = address;
+    },
+
+    afficher: function() {
+        document.getElementById("station-name").innerHTML = this.name;
+    },
+
 	bookBike: function (e) {
-    	var bookingConfirmed = document.getElementById("bookingConfirmed");
+    	var bookingConfirmed = document.getElementById("booking-confirmed");
     	
     	if(typeof sessionStorage!='undefined') {
 			sessionStorage.timeValidateBooking = Date.now();
 
 			if('timeValidateBooking' in sessionStorage) {
-			    var timeLeftBooking = 1200000 - (Date.now() - sessionStorage.timeValidateBooking);
-			    document.getElementById("timeLeftBooking").innerHTML = Math.round(timeLeftBooking/1000/60);
-				document.getElementById("timeLeftBooking-box").innerHTML = Math.round(timeLeftBooking/1000/60);
-			    document.getElementById("box-confirmation-message").classList.add("show-box-confirmation-message");
+			    // show timer for booking
+			    var countDownTime = 1200000;
+			    // Update the count down every 1 second
+				var x = setInterval(function() {
+ 					var now = Date.now() - sessionStorage.timeValidateBooking;
+ 					var distance = countDownTime - now;
+
+				    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+	    			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+	    			document.getElementById("time-left-booking").innerHTML = minutes + ":" + seconds;
+	    		}, 1000);
+
+				    
+				//document.getElementById("time-left-booking").innerHTML = Math.round(timeLeftBooking/1000/60);
+			    
+			    // confirmation message
+			    
 			    bookingConfirmed.classList.add("show-reservation");
-			    canvas.style.display = "none";
+			    
+			    // hide buttons
+			    canvas.style.display = "none"; 
 			    validateBookingButton.classList.remove("show-validate-booking");
 				clearSignature.classList.remove("show-clear");
 			}
@@ -135,18 +170,3 @@ var Booking = {
 var booking = Object.create(Booking);
 booking.init();
 
-if(typeof sessionStorage!='undefined') {				
-				if('timeValidateBooking' in sessionStorage) {
-					var timeLeftBooking = 1200000 - (Date.now() - sessionStorage.timeValidateBooking);
-					if(timeLeftBooking > 0) {
-				    	document.getElementById("timeLeftBooking").innerHTML = Math.round(timeLeftBooking/1000/60);
-				    	bookingConfirmed.classList.add("show-reservation");
-				    	document.getElementById("box-confirmation-message").classList.remove("show-box-confirmation-message");
-
-					} else {
-						sessionStorage.clear();
-					}
-				} else {
-			  alert("sessionStorage n'est pas supporté");
-			}
-		}
