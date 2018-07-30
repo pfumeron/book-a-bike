@@ -1,3 +1,8 @@
+
+
+
+
+
 var Canvas = {
 	clickX: new Array(),
 	clickY: new Array(),
@@ -119,9 +124,12 @@ canvasSignature.init('canvas');
 
 
 var Booking = {
+	
 	init: function(name,address) {
         this.name = name;
         this.address = address;
+
+         
     },
 
     afficher: function() {
@@ -129,35 +137,14 @@ var Booking = {
     },
 
 	bookBike: function (e) {
-    	var bookingConfirmed = document.getElementById("booking-confirmed");
+    	
     	
     	if(typeof sessionStorage!='undefined') {
+			
 			sessionStorage.timeValidateBooking = Date.now();
 
 			if('timeValidateBooking' in sessionStorage) {
-			    // show timer for booking
-			    var countDownTime = 1200000;
-			    // Update the count down every 1 second
-				var x = setInterval(function() {
- 					var now = Date.now() - sessionStorage.timeValidateBooking;
- 					var distance = countDownTime - now;
-
-				    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-	    			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-	    			document.getElementById("time-left-booking").innerHTML = minutes + ":" + seconds;
-	    		}, 1000);
-
-				    
-				//document.getElementById("time-left-booking").innerHTML = Math.round(timeLeftBooking/1000/60);
-			    
-			    // confirmation message
-			    
-			    bookingConfirmed.classList.add("show-reservation");
-			    
-			    // hide buttons
-			    canvas.style.display = "none"; 
-			    validateBookingButton.classList.remove("show-validate-booking");
-				clearSignature.classList.remove("show-clear");
+			    booking.displayTimer();
 			}
 
 		} else {
@@ -165,8 +152,37 @@ var Booking = {
 		}
 
     },
+
+    displayTimer: function () {
+    	var bookingConfirmed = document.getElementById("booking-confirmed");
+    	// show timer for booking
+		var countDownTime = 1200000;
+	    // Update the count down every 1 second
+		var x = setInterval(function() {
+				var now = Date.now() - sessionStorage.timeValidateBooking;
+				var distance = countDownTime - now;
+
+		    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+			document.getElementById("time-left-booking").innerHTML = minutes + ":" + seconds;
+		}, 1000);
+	    
+	    // confirmation message			    
+	    bookingConfirmed.classList.add("show-reservation");
+	    
+	    // hide buttons
+	    canvas.style.display = "none"; 
+	    validateBookingButton.classList.remove("show-validate-booking");
+		clearSignature.classList.remove("show-clear");
+    }
 };
 
 var booking = Object.create(Booking);
 booking.init();
 
+// Check if a reservation is already occuring
+if(typeof sessionStorage!='undefined') {				
+	if('timeValidateBooking' in sessionStorage) {
+		booking.displayTimer();
+	}
+}
