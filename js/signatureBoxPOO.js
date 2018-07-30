@@ -159,16 +159,24 @@ var Booking = {
 		var countDownTime = 1200000;
 	    // Update the count down every 1 second
 		var x = setInterval(function() {
-				var now = Date.now() - sessionStorage.timeValidateBooking;
-				var distance = countDownTime - now;
+			var now = Date.now() - sessionStorage.timeValidateBooking;
+			var distance = countDownTime - now;
 
 		    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
 			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 			document.getElementById("time-left-booking").innerHTML = minutes + ":" + seconds;
+
+			// If the count down is finished, write some text 
+	    	if (distance < 0) {
+			    clearInterval(x);
+			    bookingConfirmed.classList.remove("show-reservation");
+	    	}
 		}, 1000);
 	    
 	    // confirmation message			    
 	    bookingConfirmed.classList.add("show-reservation");
+
+	    
 	    
 	    // hide buttons
 	    canvas.style.display = "none"; 

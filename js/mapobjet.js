@@ -59,18 +59,11 @@ ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f4
     var json_response = JSON.parse(reponse);
 
     json_response.forEach(function(station) {
-        var marker = new mapIcons.Marker({
+        var marker = new google.maps.Marker({
             position: station.position,
             number: station.number,
             map: myMap,
-            icon: {
-                path: mapIcons.shapes.MAP_PIN,
-                fillColor: '#00CCBB',
-                fillOpacity: 1,
-                strokeColor: '',
-                strokeWeight: 0
-            },
-            map_icon_label: '<span class="map-icon map-icon-bicycle-store"></span>'
+            icon: "images/bike_icon.png",            
         });
     
     marker.addListener('click', function() {

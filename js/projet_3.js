@@ -12,10 +12,10 @@ var diapositive2 = Object.create(Diapositive);
 	diapositive2.init("images/img2.png","Vérifier les informations de la station, si vous souhaitez confirmer votre réservation, cliquez sur Réserver");
 
 var diapositive3 = Object.create(Diapositive);
-	diapositive3.init("images/img3.png","Finaliser votre réservation en signant dans le cadre puis Valider.");
+	diapositive3.init("images/img3.png","Finaliser votre réservation en signant dans le cadre puis cliquez sur Valider.");
 
 var diapositive4 = Object.create(Diapositive);
-	diapositive4.init("images/img4.png","Votre vélo est réservé pendant 20min.");
+	diapositive4.init("images/img4.png","Vous verrez apparaître un message en bas de page confirmant que votre vélo est réservé pendant 20min.");
 
 var diapositives = [diapositive1,diapositive2,diapositive3,diapositive4];
 
