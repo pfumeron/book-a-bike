@@ -110,6 +110,12 @@ bookBikeBtn.addEventListener('click', function() {
     bookBikeBtn.classList.remove("show-book-bike-btn");
 });
 
+var goBackToMap = document.getElementById("go-back-map-mobile");
+goBackToMap.addEventListener('click', function() {
+    document.getElementById("station-details").classList.remove("show-station-details");
+    document.getElementById("map").classList.remove("add-station-details");
+});
+
 
 
 

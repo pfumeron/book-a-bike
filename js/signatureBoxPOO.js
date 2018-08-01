@@ -126,10 +126,9 @@ canvasSignature.init('canvas');
 var Booking = {
 	
 	init: function(name,address) {
-        this.name = name;
-        this.address = address;
+        this.name = maStation.name;
+        this.address = maStation.address;
 
-         
     },
 
     afficher: function() {
@@ -166,6 +165,9 @@ var Booking = {
 			var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 			document.getElementById("time-left-booking").innerHTML = minutes + ":" + seconds;
 
+			// confirmation message			    
+	    	bookingConfirmed.classList.add("show-reservation");
+
 			// If the count down is finished, write some text 
 	    	if (distance < 0) {
 			    clearInterval(x);
@@ -173,8 +175,7 @@ var Booking = {
 	    	}
 		}, 1000);
 	    
-	    // confirmation message			    
-	    bookingConfirmed.classList.add("show-reservation");
+	    
 
 	    
 	    
@@ -186,10 +187,11 @@ var Booking = {
 };
 
 var booking = Object.create(Booking);
-booking.init();
+booking.init(maStation.name,maStation.address);
 
 // Check if a reservation is already occuring
-if(typeof sessionStorage!='undefined') {				
+if(typeof sessionStorage!='undefined') {	
+
 	if('timeValidateBooking' in sessionStorage) {
 		booking.displayTimer();
 	}

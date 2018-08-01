@@ -6,7 +6,7 @@ var Diapositive = {
 };
 
 var diapositive1 = Object.create(Diapositive);
-	diapositive1.init("images/img1.png","Choissisez sur la station de votre choix en cliquant sur l'un des points sur la carte. Un cercle avec un chiffre à l'intérieur indique plusieurs stations proches les unes des autres. Cliquez, les stations apparaîtront automatiquement.");
+	diapositive1.init("images/img1.png","Choissisez sur la station de votre choix en cliquant sur l'un des points sur la carte. Un cercle avec un chiffre à l'intérieur indique plusieurs stations proches les unes des autres.");
 
 var diapositive2 = Object.create(Diapositive);
 	diapositive2.init("images/img2.png","Vérifier les informations de la station, si vous souhaitez confirmer votre réservation, cliquez sur Réserver");
