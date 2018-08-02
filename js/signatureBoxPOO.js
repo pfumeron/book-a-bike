@@ -1,8 +1,3 @@
-
-
-
-
-
 var Canvas = {
 	clickX: new Array(),
 	clickY: new Array(),
@@ -34,8 +29,7 @@ var Canvas = {
 		  } else {
 		  	alert("Veuillez signer pour réserver votre vélo.")
 		  }
-		});
-	    
+		});    
 	},
 
 	addClick: function(mouseX,mouseY,newClick) {
@@ -47,11 +41,12 @@ var Canvas = {
 	mouseDown: function(e) {
         var mouseX = e.pageX - this.offsetLeft;
         var mouseY = e.pageY - this.offsetTop;
-
-        Canvas.paint = true;
-        
-        Canvas.addClick(mouseX, mouseY, false); //sends coordinates
-        Canvas.draw();
+        console.log(mouseX);
+        if (mouseX > 0) {
+	        Canvas.paint = true;
+		    Canvas.addClick(mouseX, mouseY, false); //sends coordinates
+		    Canvas.draw();
+        }
 	},
 
     draw: function () {
@@ -93,10 +88,13 @@ var Canvas = {
             var touch = e.touches[0]; // Get the information for finger #1
             var mouseX = touch.pageX - this.offsetLeft;
             var mouseY = touch.pageY - this.offsetTop;
-
             Canvas.addClick(mouseX, mouseY, true);
             Canvas.draw();
-        }
+        } else {
+        	Canvas.paint = true;
+        	Canvas.addClick(mouseX, mouseY, false);
+            Canvas.draw();
+            }
     },
 
     mouseUp: function (e) {
@@ -118,8 +116,6 @@ var Canvas = {
 	},
 };
 
-var canvasSignature = Object.create(Canvas);
-canvasSignature.init('canvas');
 
 
 
@@ -154,8 +150,9 @@ var Booking = {
 
     displayTimer: function () {
     	var bookingConfirmed = document.getElementById("booking-confirmed");
-    	// show timer for booking
+		
 		var countDownTime = 1200000;
+	    
 	    // Update the count down every 1 second
 		var x = setInterval(function() {
 			var now = Date.now() - sessionStorage.timeValidateBooking;
@@ -168,15 +165,12 @@ var Booking = {
 			// confirmation message			    
 	    	bookingConfirmed.classList.add("show-reservation");
 
-			// If the count down is finished, write some text 
+			// If the count down is finished, clears the booking and removes footer 
 	    	if (distance < 0) {
 			    clearInterval(x);
 			    bookingConfirmed.classList.remove("show-reservation");
 	    	}
 		}, 1000);
-	    
-	    
-
 	    
 	    
 	    // hide buttons
@@ -186,8 +180,12 @@ var Booking = {
     }
 };
 
+var canvasSignature = Object.create(Canvas);
+canvasSignature.init('canvas');
+
 var booking = Object.create(Booking);
 booking.init(maStation.name,maStation.address);
+
 
 // Check if a reservation is already occuring
 if(typeof sessionStorage!='undefined') {	
