@@ -39,10 +39,11 @@ var signaturePad = {
                     canvas.style.display = "none"; 
                     validateBookingButton.classList.remove("show-validate-booking");
                     clearSignature.classList.remove("show-clear");
+                    signaturePad.clear();
                 } 
             } else {
                 console.log("test");
-    		  	alert("signer pour réserver votre vélo.");
+    		  	alert("Veuillez signer pour réserver votre vélo.");
     		}
 		});    
 	},
