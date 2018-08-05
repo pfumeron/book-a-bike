@@ -75,9 +75,9 @@ goBackToMap.addEventListener('click', function() {
 
 // ------------ CANVAS --------------
 
-var booking = Object.create(Booking);
-booking.init(maStation.name,maStation.address);
-booking.afficher();
+
+// booking.init(maStation.name,maStation.address);
+// booking.afficher();
 
 
 
@@ -85,7 +85,7 @@ booking.afficher();
 if(typeof sessionStorage!='undefined') {	
 
 	if('timeValidateBooking' in sessionStorage) {
-		booking.displayTimer();
+		Booking.displayTimer();
 	}
 }
 

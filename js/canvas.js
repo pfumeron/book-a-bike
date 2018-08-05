@@ -6,39 +6,42 @@ var signaturePad = {
 	isNotEmpty: false,
 
 	init: function(canvasId) {
-		signaturePad.canvas = document.getElementById(canvasId);
-		signaturePad.context = signaturePad.canvas.getContext("2d"),
-		signaturePad.canvas.addEventListener("mousedown",signaturePad.mouseDown);
-	    signaturePad.canvas.addEventListener("mousemove", signaturePad.mouseMove);
-	    signaturePad.canvas.addEventListener("mouseup",signaturePad.mouseUp);
+        signaturePad.canvas = document.getElementById(canvasId);
+        signaturePad.context = signaturePad.canvas.getContext("2d"),
+        signaturePad.canvas.addEventListener("mousedown",signaturePad.mouseDown);
+        signaturePad.canvas.addEventListener("mousemove", signaturePad.mouseMove);
+        signaturePad.canvas.addEventListener("mouseup",signaturePad.mouseUp);
 
-	     //For mobile
-	    signaturePad.canvas.addEventListener("touchstart", signaturePad.mouseDown, false);
-	    signaturePad.canvas.addEventListener("touchmove", signaturePad.touchMove, true);
-	    signaturePad.canvas.addEventListener("touchend", signaturePad.mouseUp, false);
-	    document.body.addEventListener("touchcancel", signaturePad.mouseUp, false);
+	   //For mobile
+        signaturePad.canvas.addEventListener("touchstart", signaturePad.mouseDown, false);
+        signaturePad.canvas.addEventListener("touchmove", signaturePad.touchMove, true);
+        signaturePad.canvas.addEventListener("touchend", signaturePad.mouseUp, false);
+        document.body.addEventListener("touchcancel", signaturePad.mouseUp, false);
 
-	    var clearButton = document.getElementById("clear");
-	    clearButton.addEventListener('click', signaturePad.clear);
+        var clearButton = document.getElementById("clear");
+        clearButton.addEventListener('click', signaturePad.clear);
 	    
-		var validateBooking = document.getElementById("validate-booking");
-		validateBooking.addEventListener('click', function(){
+        var validateBooking = document.getElementById("validate-booking");
+        validateBooking.addEventListener('click', function(){
+            var stationNumber = validateBooking.getAttribute("data-station-number");
+
             if (signaturePad.isNotEmpty) {
                 if ('timeValidateBooking' in sessionStorage) {
                     var confirmNewBooking = confirm("Attention, en validant, vous annulerez votre réservation en cours.");
                     if (confirmNewBooking) {
-                        Booking.bookBike();
+                        Booking.bookBike(stationNumber);
+
                         //hide buttons once booking is confirmed
                         canvas.style.display = "none"; 
-                        validateBookingButton.classList.remove("show-validate-booking");
+                        validateBooking.classList.remove("show-validate-booking");
                         clearSignature.classList.remove("show-clear");
                         signaturePad.clear(); 
                     }
                 } else {
-        		    Booking.bookBike();
+        		    Booking.bookBike(stationNumber);
                     //hide buttons once booking is confirmed
                     canvas.style.display = "none"; 
-                    validateBookingButton.classList.remove("show-validate-booking");
+                    validateBooking.classList.remove("show-validate-booking");
                     clearSignature.classList.remove("show-clear");
                     signaturePad.clear();
                 } 

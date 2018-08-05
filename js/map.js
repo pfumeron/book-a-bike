@@ -25,6 +25,7 @@ var Map = {
             });
         
             marker.addListener('click', function() {
+                validateBookingButton.setAttribute("data-station-number",marker.number);
                 validateBookingButton.classList.remove("show-validate-booking");
                 clearSignature.classList.remove("show-clear");
                 bookBikeBtn.classList.add("show-book-bike-btn");

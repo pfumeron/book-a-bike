@@ -1,30 +1,22 @@
 var Booking = {
-	
-	init: function(name,address) {
-        this.name = name;
-        this.address = address;
 
-    },
+	bookBike: function (stationNumber) {
+    	var url = "https://api.jcdecaux.com/vls/v1/stations/" + stationNumber + "?contract=lyon&apiKey=93e55d0f44a09c1eb3a3a29e5ae0068c69ae318d";
+        ajaxGet(url, function (reponse) {
+            var address = JSON.parse(reponse).address;
+            if(typeof sessionStorage!='undefined') {
+                
+                sessionStorage.timeValidateBooking = Date.now();
+                sessionStorage.maStationAddress = address;
 
-    afficher: function() {
-        document.getElementById("booking-confirmed-station-address").innerHTML = this.address;
-    },
+                if('timeValidateBooking' in sessionStorage) {
+                    Booking.displayTimer();
+                }
 
-	bookBike: function (e) {
-    	
-    	
-    	if(typeof sessionStorage!='undefined') {
-			
-			sessionStorage.timeValidateBooking = Date.now();
-
-			if('timeValidateBooking' in sessionStorage) {
-			    booking.displayTimer();
-			}
-
-		} else {
-		  alert("sessionStorage n'est pas supporté");
-		}
-
+            } else {
+                alert("sessionStorage n'est pas supporté");
+            }
+        });
     },
 
     displayTimer: function () {
@@ -43,6 +35,7 @@ var Booking = {
 
 			// confirmation message			    
 	    	bookingConfirmed.classList.add("show-reservation");
+	    	document.getElementById("booking-confirmed-station-address").innerHTML = sessionStorage.maStationAddress;
 
 			// If the count down is finished, clears the booking and removes footer 
 	    	if (distance < 0) {
