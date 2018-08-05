@@ -1,4 +1,4 @@
-var Canvas = {
+var signaturePad = {
 	clickX: new Array(),
 	clickY: new Array(),
 	newDrawing: new Array(),
@@ -6,35 +6,51 @@ var Canvas = {
 	isNotEmpty: false,
 
 	init: function(canvasId) {
-		Canvas.canvas = document.getElementById(canvasId);
-		Canvas.context = Canvas.canvas.getContext("2d"),
-		Canvas.canvas.addEventListener("mousedown",Canvas.mouseDown);
-	    Canvas.canvas.addEventListener("mousemove", Canvas.mouseMove);
-	    Canvas.canvas.addEventListener("mouseup",Canvas.mouseUp);
+		signaturePad.canvas = document.getElementById(canvasId);
+		signaturePad.context = signaturePad.canvas.getContext("2d"),
+		signaturePad.canvas.addEventListener("mousedown",signaturePad.mouseDown);
+	    signaturePad.canvas.addEventListener("mousemove", signaturePad.mouseMove);
+	    signaturePad.canvas.addEventListener("mouseup",signaturePad.mouseUp);
 
 	     //For mobile
-	    Canvas.canvas.addEventListener("touchstart", Canvas.mouseDown, false);
-	    Canvas.canvas.addEventListener("touchmove", Canvas.touchMove, true);
-	    Canvas.canvas.addEventListener("touchend", Canvas.mouseUp, false);
-	    document.body.addEventListener("touchcancel", Canvas.mouseUp, false);
+	    signaturePad.canvas.addEventListener("touchstart", signaturePad.mouseDown, false);
+	    signaturePad.canvas.addEventListener("touchmove", signaturePad.touchMove, true);
+	    signaturePad.canvas.addEventListener("touchend", signaturePad.mouseUp, false);
+	    document.body.addEventListener("touchcancel", signaturePad.mouseUp, false);
 
 	    var clearButton = document.getElementById("clear");
-	    clearButton.addEventListener('click', Canvas.clear);
+	    clearButton.addEventListener('click', signaturePad.clear);
 	    
 		var validateBooking = document.getElementById("validate-booking");
 		validateBooking.addEventListener('click', function(){
-		  if (Canvas.isNotEmpty) {
-		    Booking.bookBike();
-		  } else {
-		  	alert("Veuillez signer pour réserver votre vélo.")
-		  }
+            if (signaturePad.isNotEmpty) {
+                if ('timeValidateBooking' in sessionStorage) {
+                    var confirmNewBooking = confirm("Attention, en validant, vous annulerez votre réservation en cours.");
+                    if (confirmNewBooking) {
+                        Booking.bookBike();
+                        //hide buttons once booking is confirmed
+                        canvas.style.display = "none"; 
+                        validateBookingButton.classList.remove("show-validate-booking");
+                        clearSignature.classList.remove("show-clear"); 
+                    }
+                } else {
+        		    Booking.bookBike();
+                    //hide buttons once booking is confirmed
+                    canvas.style.display = "none"; 
+                    validateBookingButton.classList.remove("show-validate-booking");
+                    clearSignature.classList.remove("show-clear");
+                } 
+            } else {
+                console.log("test");
+    		  	alert("signer pour réserver votre vélo.");
+    		}
 		});    
 	},
 
 	addClick: function(mouseX,mouseY,newClick) {
-        Canvas.clickX.push(mouseX);
-        Canvas.clickY.push(mouseY);
-        Canvas.newDrawing.push(newClick);
+        signaturePad.clickX.push(mouseX);
+        signaturePad.clickY.push(mouseY);
+        signaturePad.newDrawing.push(newClick);
 	},
 
 	mouseDown: function(e) {
@@ -42,75 +58,69 @@ var Canvas = {
         var mouseY = e.pageY - this.offsetTop;
         
         if (mouseX > 0) {
-	        Canvas.paint = true;
-		    Canvas.addClick(mouseX, mouseY, false); //sends coordinates
-		    Canvas.draw();
+	        signaturePad.paint = true;
+		    signaturePad.addClick(mouseX, mouseY, false); //sends coordinates
+		    signaturePad.draw();
         }
 	},
 
     draw: function () {
-        Canvas.context.strokeStyle = "#000000";  //set the "ink" color
-        Canvas.context.lineJoin = "miter";       //line join
-        Canvas.context.lineWidth = 2;
+        signaturePad.context.strokeStyle = "#000000";  //set the "ink" color
+        signaturePad.context.lineJoin = "miter";       //line join
+        signaturePad.context.lineWidth = 2;
 
-        for (var i=0; i < Canvas.clickX.length;i++) {
-            Canvas.context.beginPath();
+        for (var i=0; i < signaturePad.clickX.length;i++) {
+            signaturePad.context.beginPath();
             
-            if (Canvas.newDrawing[i]) {
-                Canvas.context.moveTo(Canvas.clickX[i-1], Canvas.clickY[i-1]);    
+            if (signaturePad.newDrawing[i]) {
+                signaturePad.context.moveTo(signaturePad.clickX[i-1], signaturePad.clickY[i-1]);    
             } else {
-                Canvas.context.moveTo(Canvas.clickX[i]-1, Canvas.clickY[i]);
+                signaturePad.context.moveTo(signaturePad.clickX[i]-1, signaturePad.clickY[i]);
             }
             
-            Canvas.context.lineTo(Canvas.clickX[i],Canvas.clickY[i]);
-            Canvas.context.stroke();                                  //filled with "ink"
-            Canvas.context.closePath();                               //close path
+            signaturePad.context.lineTo(signaturePad.clickX[i],signaturePad.clickY[i]);
+            signaturePad.context.stroke();                                  //filled with "ink"
+            signaturePad.context.closePath();                               //close path
         }
 
-        Canvas.isNotEmpty = true;
+        signaturePad.isNotEmpty = true;
     },
 
     mouseMove: function (e) {
     	e.preventDefault();
-        if (Canvas.paint) {
+        if (signaturePad.paint) {
             var mouseX = e.pageX - this.offsetLeft;
             var mouseY = e.pageY - this.offsetTop;
 
-            Canvas.addClick(mouseX, mouseY, true);
-            Canvas.draw();
+            signaturePad.addClick(mouseX, mouseY, true);
+            signaturePad.draw();
         }
 	},
 
     touchMove: function (e) {
         e.preventDefault();
-        if (Canvas.paint) {
+        if (signaturePad.paint) {
             var touch = e.touches[0]; // Get the information for finger #1
             var mouseX = touch.pageX - this.offsetLeft;
             var mouseY = touch.pageY - this.offsetTop;
-            Canvas.addClick(mouseX, mouseY, true);
-            Canvas.draw();
+            signaturePad.addClick(mouseX, mouseY, true);
+            signaturePad.draw();
         } else {
-        	Canvas.paint = true;
-        	Canvas.addClick(mouseX, mouseY, false);
-            Canvas.draw();
+        	signaturePad.paint = true;
+        	signaturePad.addClick(mouseX, mouseY, false);
+            signaturePad.draw();
             }
     },
 
     mouseUp: function (e) {
-        Canvas.paint = false;
+        signaturePad.paint = false;
     },
 
     clear: function (e) {
-        Canvas.context.clearRect(0,0,Canvas.canvas.width,Canvas.canvas.height);
-        Canvas.clickX = [];
-        Canvas.clickY = [];
-        Canvas.newDrawing = [];
-        Canvas.isNotEmpty = false;
-	},
-	
-	isNotEmpty: function() {
-		if (isNotEmpty) {
-			Canvas.isNotEmpty = true;
-		}
-	},
+        signaturePad.context.clearRect(0,0,signaturePad.canvas.width,signaturePad.canvas.height);
+        signaturePad.clickX = [];
+        signaturePad.clickY = [];
+        signaturePad.newDrawing = [];
+        signaturePad.isNotEmpty = false;
+	}
 };

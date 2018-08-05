@@ -20,7 +20,7 @@ function ajaxGet(url, callback) {
 ajaxGet("https://api.jcdecaux.com/vls/v1/stations?contract=lyon&apiKey=93e55d0f44a09c1eb3a3a29e5ae0068c69ae318d", function (reponse) {
     var json_response = JSON.parse(reponse);
 
-    var canvas = Object.create(Canvas);
+    var canvas = Object.create(signaturePad);
     canvas.init("canvas");
 
     myMap.addStations(json_response);

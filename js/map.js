@@ -27,7 +27,6 @@ var Map = {
             marker.addListener('click', function() {
                 validateBookingButton.classList.remove("show-validate-booking");
                 clearSignature.classList.remove("show-clear");
-                //document.getElementById("no-bike-available").classList.remove("show-no-bike-available");
                 bookBikeBtn.classList.add("show-book-bike-btn");
 
                 var url = "https://api.jcdecaux.com/vls/v1/stations/" + marker.number + "?contract=lyon&apiKey=93e55d0f44a09c1eb3a3a29e5ae0068c69ae318d";
@@ -47,12 +46,13 @@ var Map = {
                         document.getElementById("no-bike-available").classList.add("show-no-bike-available");
                     }
                     else {
+                        document.getElementById("no-bike-available").classList.remove("show-no-bike-available");
                         document.getElementById("map").classList.add("add-station-details");
                         document.getElementById("station-details").classList.add("show-station-details");
                         bookBikeBtn.classList.add("show-book-bike-btn");
                     }
 
-                    Canvas.canvas.style.display = "none";
+                    signaturePad.canvas.style.display = "none";
                     maStation.afficher();
                 });
             });

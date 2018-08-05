@@ -49,12 +49,8 @@ var Booking = {
 			    clearInterval(x);
 			    bookingConfirmed.classList.remove("show-reservation");
 	    	}
+
+	    	
 		}, 1000);
-	    
-	    
-	    // hide buttons
-	    canvas.style.display = "none"; 
-	    validateBookingButton.classList.remove("show-validate-booking");
-		clearSignature.classList.remove("show-clear");
     }
 };

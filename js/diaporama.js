@@ -1,4 +1,3 @@
-
 var Diaporama = {
 	init : function(slides) {
 		this.slides = slides;

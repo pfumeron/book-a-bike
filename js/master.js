@@ -75,12 +75,10 @@ goBackToMap.addEventListener('click', function() {
 
 // ------------ CANVAS --------------
 
-var canvasSignature = Object.create(Canvas);
-canvasSignature.init('canvas');
-
 var booking = Object.create(Booking);
 booking.init(maStation.name,maStation.address);
 booking.afficher();
+
 
 
 // Check if a reservation is already occuring
