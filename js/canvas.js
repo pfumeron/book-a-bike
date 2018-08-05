@@ -31,7 +31,8 @@ var signaturePad = {
                         //hide buttons once booking is confirmed
                         canvas.style.display = "none"; 
                         validateBookingButton.classList.remove("show-validate-booking");
-                        clearSignature.classList.remove("show-clear"); 
+                        clearSignature.classList.remove("show-clear");
+                        signaturePad.clear(); 
                     }
                 } else {
         		    Booking.bookBike();
