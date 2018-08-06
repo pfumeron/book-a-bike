@@ -1,18 +1,18 @@
 var signaturePad = {
-	clickX: new Array(),
-	clickY: new Array(),
-	newDrawing: new Array(),
-	paint: false,
-	isNotEmpty: false,
+    clickX: new Array(),
+    clickY: new Array(),
+    newDrawing: new Array(),
+    paint: false,
+    isNotEmpty: false,
 
-	init: function(canvasId) {
+    init: function(canvasId) {
         signaturePad.canvas = document.getElementById(canvasId);
         signaturePad.context = signaturePad.canvas.getContext("2d"),
         signaturePad.canvas.addEventListener("mousedown",signaturePad.mouseDown);
         signaturePad.canvas.addEventListener("mousemove", signaturePad.mouseMove);
         signaturePad.canvas.addEventListener("mouseup",signaturePad.mouseUp);
 
-	   //For mobile
+       //For mobile
         signaturePad.canvas.addEventListener("touchstart", signaturePad.mouseDown, false);
         signaturePad.canvas.addEventListener("touchmove", signaturePad.touchMove, true);
         signaturePad.canvas.addEventListener("touchend", signaturePad.mouseUp, false);
@@ -20,10 +20,10 @@ var signaturePad = {
 
         var clearButton = document.getElementById("clear");
         clearButton.addEventListener('click', signaturePad.clear);
-	    
-        var validateBooking = document.getElementById("validate-booking");
-        validateBooking.addEventListener('click', function(){
-            var stationNumber = validateBooking.getAttribute("data-station-number");
+        
+        
+        validateBookingButton.addEventListener('click', function(){
+            var stationNumber = validateBookingButton.getAttribute("data-station-number");
 
             if (signaturePad.isNotEmpty) {
                 if ('timeValidateBooking' in sessionStorage) {
@@ -33,41 +33,41 @@ var signaturePad = {
 
                         //hide buttons once booking is confirmed
                         canvas.style.display = "none"; 
-                        validateBooking.classList.remove("show-validate-booking");
+                        validateBookingButton.classList.remove("show-validate-booking");
                         clearSignature.classList.remove("show-clear");
                         signaturePad.clear(); 
                     }
                 } else {
-        		    Booking.bookBike(stationNumber);
+                    Booking.bookBike(stationNumber);
                     //hide buttons once booking is confirmed
                     canvas.style.display = "none"; 
-                    validateBooking.classList.remove("show-validate-booking");
+                    validateBookingButton.classList.remove("show-validate-booking");
                     clearSignature.classList.remove("show-clear");
                     signaturePad.clear();
                 } 
             } else {
                 console.log("test");
-    		  	alert("Veuillez signer pour réserver votre vélo.");
-    		}
-		});    
-	},
+                alert("Veuillez signer pour réserver votre vélo.");
+            }
+        });    
+    },
 
-	addClick: function(mouseX,mouseY,newClick) {
+    addClick: function(mouseX,mouseY,newClick) {
         signaturePad.clickX.push(mouseX);
         signaturePad.clickY.push(mouseY);
         signaturePad.newDrawing.push(newClick);
-	},
+    },
 
-	mouseDown: function(e) {
+    mouseDown: function(e) {
         var mouseX = e.pageX - this.offsetLeft;
         var mouseY = e.pageY - this.offsetTop;
         
         if (mouseX > 0) {
-	        signaturePad.paint = true;
-		    signaturePad.addClick(mouseX, mouseY, false); //sends coordinates
-		    signaturePad.draw();
+            signaturePad.paint = true;
+            signaturePad.addClick(mouseX, mouseY, false); //sends coordinates
+            signaturePad.draw();
         }
-	},
+    },
 
     draw: function () {
         signaturePad.context.strokeStyle = "#000000";  //set the "ink" color
@@ -92,7 +92,7 @@ var signaturePad = {
     },
 
     mouseMove: function (e) {
-    	e.preventDefault();
+        e.preventDefault();
         if (signaturePad.paint) {
             var mouseX = e.pageX - this.offsetLeft;
             var mouseY = e.pageY - this.offsetTop;
@@ -100,7 +100,7 @@ var signaturePad = {
             signaturePad.addClick(mouseX, mouseY, true);
             signaturePad.draw();
         }
-	},
+    },
 
     touchMove: function (e) {
         e.preventDefault();
@@ -111,10 +111,10 @@ var signaturePad = {
             signaturePad.addClick(mouseX, mouseY, true);
             signaturePad.draw();
         } else {
-        	signaturePad.paint = true;
-        	signaturePad.addClick(mouseX, mouseY, false);
+            signaturePad.paint = true;
+            signaturePad.addClick(mouseX, mouseY, false);
             signaturePad.draw();
-            }
+        }
     },
 
     mouseUp: function (e) {
@@ -127,5 +127,5 @@ var signaturePad = {
         signaturePad.clickY = [];
         signaturePad.newDrawing = [];
         signaturePad.isNotEmpty = false;
-	}
+    }
 };

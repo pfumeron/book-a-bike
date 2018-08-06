@@ -30,24 +30,25 @@ var Map = {
                 clearSignature.classList.remove("show-clear");
                 bookBikeBtn.classList.add("show-book-bike-btn");
 
-                var url = "https://api.jcdecaux.com/vls/v1/stations/" + marker.number + "?contract=lyon&apiKey=93e55d0f44a09c1eb3a3a29e5ae0068c69ae318d";
-
-                ajaxGet(url, function (reponse) {
-                    var name            = JSON.parse(reponse).name,
-                        address         = JSON.parse(reponse).address,
-                        available_bikes = JSON.parse(reponse).available_bikes,
+                apiJCDecaux.getStation('lyon',marker.number,function(response) {
+                    var name            = JSON.parse(response).name,
+                        status          = JSON.parse(response).status,
+                        address         = JSON.parse(response).address,
+                        availableBikes = JSON.parse(response).available_bikes,
                         maStation       = Object.create(Station);
                 
-                    maStation.init(name, address, available_bikes);
+                    maStation.init(name, address, availableBikes,status);
                     
-                    if (maStation.available_bikes === 0) {
+                    if (maStation.availableBikes === 0) {
                         bookBikeBtn.classList.remove("show-book-bike-btn");
                         Map.resize();
                         document.getElementById("station-details").classList.add("show-station-details");
+                        document.getElementById("status").classList.add("show-status");
                         document.getElementById("no-bike-available").classList.add("show-no-bike-available");
                     }
                     else {
                         document.getElementById("no-bike-available").classList.remove("show-no-bike-available");
+                        document.getElementById("status").classList.add("show-status");
                         document.getElementById("map").classList.add("add-station-details");
                         document.getElementById("station-details").classList.add("show-station-details");
                         bookBikeBtn.classList.add("show-book-bike-btn");
@@ -57,8 +58,7 @@ var Map = {
                     maStation.afficher();
                 });
             });
-
-          markers.push(marker);  
+            markers.push(marker);  
         });
 
         var markerCluster = new MarkerClusterer(m, markers,

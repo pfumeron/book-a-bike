@@ -153,7 +153,7 @@ p {
 	cursor: pointer;
 }
 
-#myDescriptions {
+#my-descriptions {
 	margin:0;
 	height:60px;
 	padding: 30px;
@@ -204,11 +204,11 @@ p {
 	width: 30%;
 }
 
-#book-bike-btn, #validate-booking, #clear, #no-bike-available, #box-confirmation-message, #go-back-map-mobile {
+#book-bike-btn, #validate-booking, #clear, #no-bike-available, #box-confirmation-message, #go-back-map-mobile, #status {
 	display: none;
 }
 
-#book-bike-btn.show-book-bike-btn, #validate-booking.show-validate-booking, #clear.show-clear, #no-bike-available.show-no-bike-available {
+#book-bike-btn.show-book-bike-btn, #validate-booking.show-validate-booking, #clear.show-clear, #no-bike-available.show-no-bike-available, #status.show-status {
 	display: inline;
 }
 
