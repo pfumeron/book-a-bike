@@ -39,7 +39,7 @@ var Map = {
                 
                     maStation.init(name, address, availableBikes,status);
                     
-                    if (maStation.availableBikes === 0) {
+                    if (availableBikes === 0) {
                         bookBikeBtn.classList.remove("show-book-bike-btn");
                         Map.resize();
                         document.getElementById("station-details").classList.add("show-station-details");
