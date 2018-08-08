@@ -34,7 +34,7 @@ var Map = {
                     var name            = JSON.parse(response).name,
                         status          = JSON.parse(response).status,
                         address         = JSON.parse(response).address,
-                        availableBikes = JSON.parse(response).available_bikes,
+                        availableBikes  = JSON.parse(response).available_bikes,
                         maStation       = Object.create(Station);
                 
                     maStation.init(name, address, availableBikes,status);
